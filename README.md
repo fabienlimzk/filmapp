@@ -1,68 +1,123 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Starting a Film Project
 
-## Available Scripts
+Fork and clone the `react-film` repo.
 
-In the project directory, you can run:
+Generate a new app with `npx create-react-app filmapp`
+## Your Mission
 
-### `yarn start`
+Today the plan is to identify the app components, create the overall structure, then split that structure into individual components. You'll pass films as props to each component and ultimately use iteration to render one component for each film. At the end of this exercise, you will have this app:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![](images/film-1.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Tasks
 
-### `yarn test`
+**Importantly**: After each step below, check your application to see how it looks before going to the next one. It's good practice to be sure your app is working correctly before adding new functionality.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<details>
+  <summary>Hint</summary>
+  Don't forget any <code>import</code> statements as you add more files.
+</details>
 
-### `yarn build`
+#### Step 1: Create baseline layout
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+First, create the layout. You'll have a Films column and a Details column.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Make the provided `App` component render the following code:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```html
+<div className="film-library">
+  <div className="film-list">
+    <h1 className="section-title">FILMS</h1>
+  </div>
 
-### `yarn eject`
+  <div className="film-details">
+    <h1 className="section-title">DETAILS</h1>
+  </div>
+</div>
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Step 2: Create new components
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Move the `film-list` and `film-details` into their own separate components (in separate files), `FilmListing` and `FilmDetails`, respectively.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Make sure you now call these components in `App.js`. Check your app in the browser. If you've done it right, nothing will have changed, and the application will look the same.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Step 3: Pass props to the new components
 
-## Learn More
+Pass the films (stored in `TMDB.films`) to each of your new components as props.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+If you check your file, it still shouldn't look differently. We're sending the props to the components, but we are not using the props yet.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<details>
+  <summary>Hint</summary>
+  For now, this step is just changing the <code>App.js</code> file to be sure it imports the film file and passes props.
+</details>
 
-### Code Splitting
+#### Step 4: Render a film
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+In the `FilmListing` component, render the title of just 1 film as an `<h1>`, below the `section-title`.
 
-### Analyzing the Bundle Size
+Does "It" appear on the left side of your browser?
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+<details>
+  <summary>Hint</summary>
+  The films prop is an array, and you just want the title from the first one.
+</details>
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+#### Step 5: Create and render an array of film title elements
 
-### Advanced Configuration
+Use `.map()` inside of the `FilmListing` to iterate over the collection of films and create an element for each one. (Here is the [map documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Then, render the variable `allFilms` underneath the Films `<h1>`.
 
-### Deployment
+You should have a list of all the films appear in the left column.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+<details>
+  <summary>Hint - Need help on <code>map</code>?</summary>
+  This step will look like this in your <code>render</code> method (above the <code>return</code>):
+  <code> let allFilms = this.props.films.map( (film, index) => ( your-jsx-per-film-here ))</code>
+    Then, you'll just need to call <code>{allFilms}</code> in your JSX where you want the titles to appear.
+</details>
 
-### `yarn build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+#### Step 6: Move the film rows to their own component
+
+Create a new component for each film row, called `FilmRow.js`. Have your `map` instead create an array of `FilmRow`s. Don't forget to pass the individual film prop to the component when creating them!
+
+Once you have this working, also pass `film.id` as a `key` prop to `FilmRow`, though you won't use it yet.
+
+
+#### Step 7: Flesh out each film row
+
+Make each film row in the film list look like the main finished image, using the following markup (replace "TITLE" and "YEAR" with the actual title and year of the film).
+
+```
+<div className="film-row">
+  <img src={posterUrl} alt="" />
+
+  <div className="film-summary">
+    <h1>TITLE</h1>
+    <p>YEAR</p>
+  </div>
+</div>
+```
+
+- You'll have to create the `posterUrl` for each film by combining the prefix `https://image.tmdb.org/t/p/w780/` with each film's `poster_path` property.
+
+- You'll also have to extract the year from the `release_date` property. To do this, you'll need to figure out how to use the [`getFullYear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear) JS method.
+
+<details>
+  <summary>Hint on <code>getFullYear()</code></summary>
+  <code>getFullYear()</code> will be a single line of new code, and you'll use the keywords <code>new</code> and <code>Date</code>.
+</details>
+
+
+#### Step 8: Move film posters to their own component
+
+Since the poster requires you to create the URL first, move those elements to their own component. This could be reusable later. Don't forget to pass the film as a prop to the new `FilmPoster` component.
+
+#### PART 1 Complete!
+
+![](https://i.imgur.com/JdVta3i.png)
