@@ -7,19 +7,23 @@ import FilmDetails from './FilmDetails'
 
 function App() {
   return (
-    <div className="App">
-      <div className="film-library">
-        <div className="film-list">
-          <h1 className="section-title">FILMS</h1>
-          <FilmListing movie={ TMDB }/>
-        </div>
-
-        <div className="film-details">
-          <h1 className="section-title">DETAILS</h1>
-          <FilmDetails />
-        </div>
-      </div>
+    <div className="film-library">
+      <FilmListing movie = {TMDB} />
+      <FilmDetails />
     </div>
+    // <div className="App">
+    //   <div className="film-library">
+    //     <div className="film-list">
+    //       <h1 className="section-title">FILMS</h1>
+    //       <FilmListing movie={ TMDB }/>
+    //     </div>
+
+    //     <div className="film-details">
+    //       <h1 className="section-title">DETAILS</h1>
+    //       <FilmDetails />
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 
