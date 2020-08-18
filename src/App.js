@@ -11,7 +11,7 @@ function App() {
       <div className="film-library">
         <div className="film-list">
           <h1 className="section-title">FILMS</h1>
-          <FilmListing list={TMDB}/>
+          <FilmListing movie={ TMDB }/>
         </div>
 
         <div className="film-details">

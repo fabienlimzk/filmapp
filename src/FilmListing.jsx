@@ -1,25 +1,13 @@
 import React, { Component } from 'react'
-
-class FilmListing extends Component {
+import FilmRow from "./FilmRow"
+export default class FilmListing extends Component {
   render() {
-    let AllFilms = this.props.list.films.map((film, i) => {
-      return (
-        <div className="film-row" key={i}>
-          <img src={"https://image.tmdb.org/t/p/w780" + film.poster_path} alt="" />
-
-          <div className="film-summary">
-            <h1>{film.title}</h1>
-            <p>{new Date(film.release_date).getFullYear()}</p>
-          </div>
-        </div>
-      )
-    });
+    let allFilms = this.props.movie.films.map( (film, index) => (<FilmRow key = {film.id} movie = {film}/> ))
     return (
-      <div>
-        {AllFilms}
+      <div className="film-list">
+          <h1 className="section-title">FILMS</h1>
+          {allFilms}
       </div>
     )
   }
 }
-
-export default FilmListing
